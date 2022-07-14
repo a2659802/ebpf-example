@@ -13,3 +13,7 @@
 *.i*86
 *.x86_64
 *.hex
+
+# generated go file 
+bpf_bpfeb.go 
+bpf_bpfel.go
