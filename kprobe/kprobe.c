@@ -11,6 +11,14 @@ struct bpf_map_def SEC("maps") kprobe_map = {
 	.max_entries = 1,
 };
 
+// 另一种定义法
+// struct {
+// 	__uint(type, BPF_MAP_TYPE_ARRAY);
+// 	__uint(max_entries, 2);
+// 	__type(key, u32); // or __uint(key_size,sizeof(u32))
+// 	__type(value, u64);
+// }kprobe_map SEC(".maps");
+
 SEC("kprobe/sys_execve")
 int kprobe_execve() {
 	u32 key     = 0;
@@ -22,6 +30,6 @@ int kprobe_execve() {
 		return 0;
 	}
 	__sync_fetch_and_add(valp, 1);
-	
+
 	return 0;
 }
